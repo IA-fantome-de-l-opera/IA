@@ -8,19 +8,14 @@ def suspects_in_room(data, room):
             suspects += 1
     return suspects
 
-
-def inspector_points(data, shadow): #maximum suspects
+def inspector_points(data, shadow):
     alone_suspects = 0
     grouped_suspects = 0
     # counting how many people are in each room
     positions = Counter(d["position"] for d in data)
     for position, count in positions.most_common():
-        if count > 1:
-            # if the lights are off the suspects count as being alone
-            if shadow == position:
-                alone_suspects += suspects_in_room(data, position)
-            else:
-                grouped_suspects += suspects_in_room(data, position)
+        if (count > 1) and (shadow != position):
+            grouped_suspects += suspects_in_room(data, position)
         else:
             alone_suspects += suspects_in_room(data, position)
     print("grouped suspects: ", grouped_suspects)
@@ -46,18 +41,11 @@ def phantom_points(data, shadow, phantom_color):
     if (positions[phantom["position"]] > 1) and (shadow != phantom["position"]):
         phantom_scream = False
     for position, count in positions.most_common():
-        if count > 1:
-            # if the lights are off the suspects count as being alone
-            if shadow == position:
-                if phantom_scream:
-                    phantom_suspects += suspects_in_room(data, position)
-                else:
-                    safe_suspects += suspects_in_room(data, position)
+        if (count > 1) and (shadow != position):
+            if phantom_scream:
+                safe_suspects += suspects_in_room(data, position)
             else:
-                if phantom_scream:
-                    safe_suspects += suspects_in_room(data, position)
-                else:
-                    phantom_suspects += suspects_in_room(data, position)
+                phantom_suspects += suspects_in_room(data, position)
         else:
             if phantom_scream:
                 phantom_suspects += suspects_in_room(data, position)
