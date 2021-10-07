@@ -20,13 +20,12 @@ def inspector_points(data, shadow):
             alone_suspects += suspects_in_room(data, position)
     print("grouped suspects: ", grouped_suspects)
     print("alone suspects: ", alone_suspects)
-    min_points = 0
+    # calculate the minimum possible gain
+    min_points = min(grouped_suspects, alone_suspects)
     # add a small bonus for red character's power
     red = next((character for character in data if character["color"] == "red"), None)
     if red["power"]:
         min_points += 0.5
-    # calculate the minimum possible gain
-    min_points += min(grouped_suspects, alone_suspects)
     print("final points: ", min_points)
     return min_points
 
