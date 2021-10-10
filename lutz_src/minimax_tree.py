@@ -10,22 +10,14 @@ class Node:
         self.name = name
         self.child = None
 
-    def __repr__(self):
-        st = "%s, " % (self.name)
-        if self.child != None:
-            for s in self.child:
-                st += str(s)
-            st += "\n"
-        return st
-
 # generate tree path considering where characters are
 def room0(isPink, names):
     move0 = Node("to 1", -1)
     move1 = Node("to 4", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-    room0.child = [move0, move1]
+        move1.child = treeGen(names)
+    room0 = [move0, move1]
     return room0
 
 def room1(isPink, names):
@@ -33,16 +25,15 @@ def room1(isPink, names):
     move1 = Node("to 2", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-    room1 = Node(None, -1)
-    room1.child = [move0, move1]
+        move1.child = treeGen(names)
+    room1 = [move0, move1]
     if (isPink):
         move2 = Node("to 5", -1)
         move3 = Node("to 7", -1)
         if (len(names) > 0):
-            move2.child = copy.deepcopy(move0.child)
-            move3.child = copy.deepcopy(move0.child)
-        room1.child.append([move2, move3])
+            move2.child = treeGen(names)
+            move3.child = treeGen(names)
+        room1.append([move2, move3])
     return room1
 
 def room2(isPink, names):
@@ -50,14 +41,13 @@ def room2(isPink, names):
     move1 = Node("to 3", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-    room2 = Node(None, -1)
-    room2.child = [move0, move1]
+        move1.child = treeGen(names)
+    room2 = [move0, move1]
     if (isPink):
         move2 = Node("to 6", -1)
         if (len(names) > 0):
-            move2.child = copy.deepcopy(move0.child)
-        room1.child.append(move2)
+            move2.child = treeGen(names)
+        room2.append(move2)
     return room2
 
 def room3(isPink, names):
@@ -65,9 +55,8 @@ def room3(isPink, names):
     move1 = Node("to 7", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-    room3 = Node(None, -1)
-    room3.child = [move0, move1]
+        move1.child = treeGen(names)
+    room3 = [move0, move1]
     return room3
 
 def room4(isPink, names):
@@ -76,15 +65,14 @@ def room4(isPink, names):
     move2 = Node("to 8", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-        move2.child = copy.deepcopy(move0.child)
-    room4 = Node(None, -1)
-    room4.child = [move0, move1, move2]
+        move1.child = treeGen(names)
+        move2.child = treeGen(names)
+    room4 = [move0, move1, move2]
     if (isPink):
         move3 = Node("to 9", -1)
         if (len(names) > 0):
-            move3.child = copy.deepcopy(move0.child)
-        room4.child.append(move3)
+            move3.child = treeGen(names)
+        room4.append(move3)
     return room4
 
 def room5(isPink, names):
@@ -92,16 +80,15 @@ def room5(isPink, names):
     move1 = Node("to 6", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-    room5 = Node(None, -1)
-    room5.child = [move0, move1]
+        move1.child = treeGen(names)
+    room5 = [move0, move1]
     if (isPink):
         move2 = Node("to 1", -1)
-        move3 = Node("to 8")
+        move3 = Node("to 8", -1)
         if (len(names) > 0):
-            move2.child = copy.deepcopy(move0.child)
-            move3.child = copy.deepcopy(move0.child)
-        room5.child.append([move2, move3])
+            move2.child = treeGen(names)
+            move3.child = treeGen(names)
+        room5.append([move2, move3])
     return room5
 
 def room6(isPink, names):
@@ -109,16 +96,15 @@ def room6(isPink, names):
     move1 = Node("to 7", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-    room6 = Node(None, -1)
-    room6.child = [move0, move1]
+        move1.child = treeGen(names)
+    room6 = [move0, move1]
     if (isPink):
         move2 = Node("to 2", -1)
         move3 = Node("to 9", -1)
         if (len(names) > 0):
-            move2.child = copy.deepcopy(move0.child)
-            move3.child = copy.deepcopy(move0.child)
-        room6.child.append([move2, move3])
+            move2.child = treeGen(names)
+            move3.child = treeGen(names)
+        room6.append([move2, move3])
     return room6
 
 def room7(isPink, names):
@@ -127,15 +113,14 @@ def room7(isPink, names):
     move2 = Node("to 9", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-        move2.child = copy.deepcopy(move0.child)
-    room7 = Node(None, -1)
-    room7.child = [move0, move1, move2]
+        move1.child = treeGen(names)
+        move2.child = treeGen(names)
+    room7 = [move0, move1, move2]
     if (isPink):
         move3 = Node("to 1", -1)
         if (len(names) > 0):
-            move3.child = copy.deepcopy(move0.child)
-        room7.child.append(move3)
+            move3.child = treeGen(names)
+        room7.append(move3)
     return room7
 
 def room8(isPink, names):
@@ -143,14 +128,13 @@ def room8(isPink, names):
     move1 = Node("to 9", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-    room8 = Node(None, -1)
-    room8.child = [move0, move1]
+        move1.child = treeGen(names)
+    room8 = [move0, move1]
     if (isPink):
         move2 = Node("to 5", -1)
         if (len(names) > 0):
-            move2.child = copy.deepcopy(move0.child)
-        room8.child.append(move2)
+            move2.child = treeGen(names)
+        room8.append(move2)
     return room8
 
 def room9(isPink, names):
@@ -158,16 +142,15 @@ def room9(isPink, names):
     move1 = Node("to 8", -1)
     if (len(names) > 0):
         move0.child = treeGen(names)
-        move1.child = copy.deepcopy(move0.child)
-    room9 = Node(None, -1)
-    room9.child = [move0, move1]
+        move1.child = treeGen(names)
+    room9 = [move0, move1]
     if (isPink):
         move2 = Node("to 4", -1)
         move3 = Node("to 6", -1)
         if (len(names) > 0):
-            move2.child = copy.deepcopy(move0.child)
-            move3.child = copy.deepcopy(move0.child)
-        room9.child.append([move2, move3])
+            move2.child = treeGen(names)
+            move3.child = treeGen(names)
+        room9.append([move2, move3])
     return room9
 
 rooms = [room0, room1, room2, room3, room4, room5, room6, room7, room8, room9]
@@ -176,34 +159,48 @@ rooms = [room0, room1, room2, room3, room4, room5, room6, room7, room8, room9]
 # todo: characters power
 def pink(names, position):
     names[:] = [d for d in names if d.get('color') != "pink"]
-    return rooms[position](True, names)
+    print(names)
+    pink = Node("pink", -1)
+    pink.child = rooms[position](True, names)
+    return pink
 
 def blue(names, position):
     names[:] = [d for d in names if d.get('color') != "blue"]
-    return rooms[position](False, names)
+    blue = Node("blue", -1)
+    blue.child = rooms[position](False, names)
+    return blue
 
 def red(names, position):
     names[:] = [d for d in names if d.get('color') != "red"]
-    return rooms[position](False, names)
+    red = Node("red", -1)
+    red.child = rooms[position](False, names)
+    return red
 
 def grey(names, position):
     names[:] = [d for d in names if d.get('color') != "grey"]
-    return rooms[position](False, names)
+    grey = Node("grey", -1)
+    grey.child = rooms[position](False, names)
+    return grey
 
 def black(names, position):
     names[:] = [d for d in names if d.get('color') != "black"]
-    return rooms[position](False, names)
+    black = Node("black", -1)
+    black.child = rooms[position](False, names)
 
 def purple(names, position):
     names[:] = [d for d in names if d.get('color') != "purple"]
-    return rooms[position](False, names)
+    purple = Node("purple", -1)
+    purple.child = rooms[position](False, names)
 
 def brown(names, position):
     names[:] = [d for d in names if d.get('color') != "brown"]
-    return rooms[position](False, names)
+    brown = Node("brown", -1)
+    brown.child = rooms[position](False, names)
+    return brown
 
 def white(names, position):
     names[:] = [d for d in names if d.get('color') != "white"]
+    print(names)
     return rooms[position](False, names)
 
 characters = {
@@ -218,10 +215,16 @@ characters = {
 }
 
 def treeGen(names):
+    ## Format of input:
+    # [
+    #    {'color': 'brown', 'suspect': True, 'position': 9, 'power': False},
+    #    {'color': 'red', 'suspect': True, 'position': 3, 'power': False},
+    #    {'color': 'purple', 'suspect': True, 'position': 0, 'power': False},
+    #    {'color': 'black', 'suspect': True, 'position': 1, 'power': False}
+    # ]
     
-    print(names)
     # root
-    root = Node(None, None)
+    root = Node("Root", -1)
     root.child = []
     for n in names:
         # print (n)
