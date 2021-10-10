@@ -49,7 +49,13 @@ class Player():
         # work
         data = question["data"]
         game_state = question["game state"]
-        response_index = random.randint(0, len(data)-1)
+        response_index = -1
+        if isinstance(data[0], dict):
+            for idx, d in enumerate(data):
+                    if d['color'] == 'red':
+                        response_index = idx
+        if response_index == -1:
+            response_index = random.randint(0, len(data)-1)
         # log
         fantom_logger.debug("|\n|")
         fantom_logger.debug("fantom answers")

@@ -6,7 +6,6 @@ import socket
 from logging.handlers import RotatingFileHandler
 
 import protocol
-from lutz_src.minimax_tree import treeGen
 
 host = "localhost"
 port = 12000
@@ -51,7 +50,13 @@ class Player():
         # work
         data = question["data"]
         game_state = question["game state"]
-        response_index = random.randint(0, len(data)-1)
+        response_index = -1
+        if isinstance(data[0], dict):
+            for idx, d in enumerate(data):
+                    if d['color'] == 'red':
+                        response_index = idx
+        if response_index == -1:
+            response_index = random.randint(0, len(data)-1)
         # log
         inspector_logger.debug("|\n|")
         inspector_logger.debug("inspector answers")
@@ -63,19 +68,10 @@ class Player():
 
     def handle_json(self, data):
         data = json.loads(data)
-        # print(data)
-        starttree = []
-        if data["question type"] == "select character" and len(data["data"]) == 4:
-            for i in data["data"]:
-                starttree.append(i)
-            # print(starttree)
-            tree = treeGen(starttree)
-        
         response = self.answer(data)
         # send back to server
         bytes_data = json.dumps(response).encode("utf-8")
         protocol.send_json(self.socket, bytes_data)
-        del starttree
 
     def run(self):
 
