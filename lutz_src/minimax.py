@@ -19,11 +19,14 @@ MAX_VALUE = 1000
 # add alpha beta stuff
 
 class miniMax:
-  def __init__(self, _tree):
+  def __init__(self, _tree, inspector):
     alpha = -1
     beta = -1
     self.tree = _tree
-    self.decision = [True, False, False, True]
+    if inspector:
+      self.decision = [True, True, False, False, False, False, True, True]
+    else:
+      self.decision = [False, False, True, True, True, True, False, False]
 
   def decide(self):
     self.tree.score = self.alphabeta(self.tree)
